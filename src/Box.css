@@ -1,0 +1,34 @@
+.main-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  background-color: #4834d4;
+}
+.color-white {
+  color: white;
+}
+.disNone {
+  display: none;
+}
+.box-title {
+  text-align: center;
+}
+
+#mvContBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#mvListTb {
+  border-collapse: collapse;
+}
+
+#mvListTb thead th {
+  border-bottom: 1px solid #000;
+}
+.tac {
+  text-align: center !important;
+  padding: 5px;
+}
