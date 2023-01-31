@@ -1,0 +1,45 @@
+ h2, h3 {
+  margin: 2px;
+}
+
+#cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+#myDiv_header{
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+  background-color: #5352ed;
+  color: #fff;
+}
+#myDiv_body{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mydiv {
+  /* width: 48%; */
+  height: 300px;
+  border: 1px solid;
+}
+#myDiv1 {
+  flex-basis: 34%;
+}
+#myDiv2 {
+  flex-basis: 64%;
+}
+
+.innermydiv {
+  margin: 10px;
+  /* height: 100px; */
+  border: 1px solid;
+  /* box-sizing: border-box; */
+}
+.innermydiv p {
+  margin: 5px;
+}

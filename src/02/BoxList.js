@@ -12,24 +12,50 @@ const BoxList =()=> {
         {"rnum":"10","rank":"10","rankInten":"-1","rankOldAndNew":"OLD","movieCd":"20110882","movieNm":"밀레니엄 : 여자를 증오한 남자들","openDt":"2012-01-11","salesAmt":"37216500","salesShare":"1.2","salesInten":"-31400500","salesChange":"-45.8","salesAcc":"3134147500","audiCnt":"4865","audiInten":"-4214","audiChange":"-46.4","audiAcc":"398470","scrnCnt":"110","showCnt":"238"}
     ];
     //console.log(mvList)
-    const mvListTable = document.querySelector('#mvListTb')
+    // const mvListTable = document.querySelector('#mvListTb')
     //const mvListTbody = document.createElement('tbody')
     let mvListTr = []
     
     
     for(let i of mvList) {
-        console.log(i.rank + "\t" + i.movieNm + "\t" + i.audiAcc + "\t" + i.audiChange) // console에서 직접 호출
-        const klist = ['rank', 'movieNm', 'salesAcc', 'audiAcc', 'rankInten'];                      // key 배열을 따로 저장해서 호출
+        // console.log(i.rank + "\t" + i.movieNm + "\t" + i.audiAcc + "\t" + i.audiChange) // console에서 직접 호출
+        const klist = ['rank', 'movieNm', 'salesAcc', 'audiAcc', 'rankInten', 'movieCd'];                      // key 배열을 따로 저장해서 호출
         
-        let Temp = []
-        if('salesAcc' in klist) Temp = klist.map((k)=> <td className="tac">{i[k]} 원</td> ) 
-        else Temp = klist.map((k)=> <td className="tac">{i[k]}</td> )    //map : 배열을 받아 각각에 대해 새 배열 반환
+        let Temp = klist.map((k)=> <td className="tac">{i[k]}</td> )    //map : 배열을 받아 각각에 대해 새 배열 반환
         
         mvListTr.push(<tr>{Temp}</tr>)
         //console.log(mvListTr)
     }
     
-
+    const regEx =(value)=> {
+        const up = '▲';
+        const down = '▼';
+        if(value > 0) { return <span className="up">{up + value}</span> }
+        else if (value < 0) { return <span className="down">{down + value}</span> }
+        else return value
+    }
+    
+    let easyTr = []
+    for(let i of mvList) {
+        
+        easyTr.push(
+            <tr className="mvRow" key={i.movieCd} onClick={()=> handleDivClick(this)}>
+                <td className="tac">{i.rank}</td>
+                <td className="tac">{i.movieNm + i.movieCd}</td>
+                <td className="tac">{parseInt(i.salesAcc).toLocaleString()}</td>
+                <td className="tac">{parseInt(i.audiAcc).toLocaleString()}</td>
+                <td className="tac">{regEx(i.rankInten)}</td>
+                {/* {console.log(i.movieCd)} */}
+            </tr>
+        )
+    }
+    
+    
+    function handleDivClick(selRow) {
+        console.log(selRow.getAttribute('key'));
+    }
+    
+    
     return (
         <div id="mvContBox" >
             <div className="box-title disNone">
@@ -53,7 +79,8 @@ const BoxList =()=> {
                     </tr>
                 </thead>
                 <tbody>
-                    {mvListTr}
+                    {/* {mvListTr} */}
+                    {easyTr}
                 </tbody>
             </table>
         </div>

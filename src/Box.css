@@ -17,16 +17,20 @@
 
 #mvContBox {
   display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 
 #mvListTb {
+  width: 80%;
   border-collapse: collapse;
 }
 
 #mvListTb thead th {
   border-bottom: 1px solid #000;
+  height: 35px;
+}
+#mvListTb tr{
+  border-bottom: 1px solid;
 }
 .tac {
   text-align: center !important;

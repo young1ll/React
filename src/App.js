@@ -1,11 +1,9 @@
 import './App.css';
-import Box from './02/Box';
+import WeatherBox from './04/WeatherBox';
 
 const App =()=> {
   return (
-      <Box />
-
-    
+      <WeatherBox />
   );
 }
 
