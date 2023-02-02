@@ -24,7 +24,7 @@
 
 .mydiv {
   /* width: 48%; */
-  height: 300px;
+  /* height: 300px; */
   border: 1px solid;
 }
 #myDiv1 {
@@ -42,4 +42,14 @@
 }
 .innermydiv p {
   margin: 5px;
+}
+
+.divbt{
+  text-align: center;
+}
+.divbt span {
+  margin-left: 10px;
+}
+.btn-reset {
+  margin-left: 10px;
 }

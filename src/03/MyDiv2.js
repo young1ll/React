@@ -1,12 +1,13 @@
-import MyDiv22 from "./MyDiv22";
+import MyDiv21 from "./MyDiv21";
 
-const MyDiv2 =(probs)=> {
+const MyDiv2 =({rname, n, setN})=> {
     const user2 = '홍길동';
 
     return(
         <div id="myDiv2" className="mydiv">
             <h2>DIV2</h2>
-            <MyDiv22 rname={probs.rname} user={user2}/>
+            <MyDiv21 rname={rname} user={user2}/>
+            <button onClick={() => setN(n+2)}>💥count +2</button>
         </div>
     );
 }

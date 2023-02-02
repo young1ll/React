@@ -85,6 +85,7 @@
 .frsctInfo li:last-child span {
   font-weight: 600;
   color: #000 !important;
+  animation: none;
 }
 .frsctInfo li:hover {
   
@@ -100,7 +101,7 @@
 }
 
 .blink {
-  animation: blink-effect 1s step-end infinite;
+  animation: blink-effect .8s step-end infinite;
 }
   /*
   animation-name: blink-effect;

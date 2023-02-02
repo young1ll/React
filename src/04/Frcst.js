@@ -1,9 +1,10 @@
-// import Wbox1 from "./Wbox1";
-// import Wbox2 from "./Wbox2";
+import Wbox1 from "./Wbox1";
+import Wbox2 from "./Wbox2";
 
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
-const Frcst = (probs) => {
+const Frcst = () => {
+    
     /* 공공데이터포털 : 한국환경공단_에어코리아_대기오염정보
     frcstOneCn : 첫째날예보
     frcstTwoCn : 둘째날예보
@@ -30,82 +31,42 @@ const Frcst = (probs) => {
         "presnatnDt":"2023-01-30"
         }
         ]
-        
-    
+
     let item = items[0];
-    //console.log(item)
+    //console.log(item);
+    let tempDt = ["frcstOneDt", "frcstTwoDt", "frcstThreeDt", "frcstFourDt"];
+    let tempCn = ["frcstOneCn", "frcstTwoCn", "frcstThreeCn", "frcstFourCn"];
+    //map으로 object 배열 분할
+    //map은 배열에서 다양하게 활용할 수 있으니 잘 숙지하길 바란다.
+    let dt = tempDt.map((v)=> v.includes('One')? 1: 0)
+    // console.log("dt : " , dt);
 
-    const [info, setInfo] = useState();
+    tempDt = tempDt.map((k)=> items[0][k]);
+    tempCn = tempCn.map((k)=> items[0][k]);
 
-    const displayNone =()=> {
-        if(info == null) {
-            const temp = document.querySelectorAll(".frsctRow")
-            temp.style.display ='none';
-        }
+    let resObj = [];
+    for(let [idx, v] of tempDt.entries()) {
+        // console.log(idx, v, tempCn[idx])
+        resObj[v] = tempCn[idx];
     }
 
-    function showInfo(value) {
-        // eslint-disable-next-line default-case
-
-        let infoArr;
-        
-        switch (value) {
-            case 1:
-                infoArr = item.frcstOneCn.split(',');
-                break;
-                case 2: infoArr = item.frcstTwoCn.split(','); break;
-                case 3: infoArr = item.frcstThreeCn.split(','); break;
-                case 4: infoArr = item.frcstFourCn.split(','); break;
-                default : value = null;
-            }
-            infoArr = infoArr.map((i)=>
-            <li key={`${i}-${value}`}>
-                    <span>{i.split(':')[0]}</span>
-                    {
-                    i.includes('높음') ?
-                    <span className='blink' style={{color:"red"}}>: {i.split(':')[1]}</span>
-                    :
-                    <span style={{color:"green"}}>: {i.split(':')[1]}</span>
-                    }
-                </li>);
-            setInfo(infoArr); 
-            
-
-        console.log(infoArr);
-    }
-
+    let [sendDt, setDt] = useState();
+    let [sendCn, setCn] = useState(resObj["2023-02-04"]);
     
-    
+    useEffect(()=>{
+        //console.log(resObj[sendDt]);
+        resObj[sendDt] && setCn(resObj[sendDt])
+    }, [resObj, sendDt])
 
 
     return (
         <div id="Wdiv_body">
-
-            <div id="Wdiv1" className="w_div">
-                <div className="innerdiv">
-                    <h3>날짜</h3>
-                    
-                    <div className="frsctRow" onClick ={()=> showInfo(1)}>{item.frcstOneDt}</div>
-                    <div className="frsctRow" onClick ={()=> showInfo(2)}>{item.frcstTwoDt}</div>
-                    <div className="frsctRow" onClick ={()=> showInfo(3)}>{item.frcstThreeDt}</div>
-                    <div className="frsctRow" onClick ={()=> showInfo(4)}>{item.frcstFourDt}</div>
-                </div>
-            </div>
-
-            <div id="Wdiv2" className="w_div">
-                <div className="innerdiv">
-                    <h3>상세내용</h3>
-                    <div className="frsctInfo">
-                        <ul>{info}</ul>
-                    </div>
-                </div>
-            </div>
+            {<Wbox1 tempDt={tempDt} setDt={setDt}/>}
+            {<Wbox2 sendCn={sendCn}/>}
 
         </div>
-    );
 
-    
+    );   
 }
-
 
 export default Frcst ;
