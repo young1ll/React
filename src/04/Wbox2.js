@@ -4,8 +4,9 @@ const Wbox2 =({sendCn})=> {
     //console.log(sendCn);
 
     let infoArr = sendCn.split(',');
+    let k = 0;
     infoArr = infoArr.map((i)=>
-    <li>
+    <li key={k++}>
         <span>{i.split(':')[0]} :</span>
         {
         i.includes('높음') ?
