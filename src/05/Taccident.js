@@ -6,7 +6,25 @@ import {useEffect, useState} from 'react'
 
 import "../Taccident.css"
 
+
 const Taccident = () => {
+  
+  const targetBtn1 = document.querySelectorAll('.fSort');
+  const targetBtn2 = document.querySelectorAll('.mSort');
+  const toggleBtn1 =(e)=> {
+    for(let i=0; i < targetBtn1.length; i++) targetBtn1[i].classList.remove('btn_active');
+    e.target.classList.add('btn_active');
+  };
+  const toggleBtn2 =(e)=> {
+    for(let i=0; i < targetBtn2.length; i++) targetBtn2[i].classList.remove('btn_active');
+    e.target.classList.add('btn_active');
+  };
+  const init =()=> {
+    for(let i=0; i < targetBtn1.length; i++) targetBtn1[i].addEventListener('click', toggleBtn1);
+    for(let i=0; i < targetBtn2.length; i++) targetBtn2[i].addEventListener('click', toggleBtn2);
+  }
+  //init();
+
   const apiData = {
         "currentCount": 15,
         "data": [
@@ -151,57 +169,46 @@ const Taccident = () => {
         "perPage": 20,
         "totalCount": 15
   } ;
-  //console.log(apiData);
-
+  
+  //소분류(all data)
   let data = apiData.data;
-  //console.log('data : ', data);
+  
+  //대분류
   let c1 = data.map((i)=> i['사고유형_대분류']);
   let c1_unique = [...new Set(c1)];
-  //console.log('사고유형_대분류 : ', c1_unique);
-
+  
   //중분류
   let c2 = data.map((i)=> i['사고유형_대분류'] + ' , ' + i['사고유형_중분류']);
-  // for(let i of data) {
-  //   let temp = [];
-  //   temp.push(i.사고유형_대분류);
-  //   temp.push(i.사고유형_중분류);
-  //   c2.push(temp);
-  // }
-
-  //console.log('사고유형_중분류 : ', c2);
   
   let [c1_u, setC1] = useState();
   let [c2_u, setC2] = useState([]);
   let [c3_u, setC3] = useState([]);
-
-  console.log('data', data);
-  //console.log('확인1 : ', c1_u);
-  //console.log('확인2 : ', c2);
+  
+  //console.log('c1_u', c1_u)
   
   useEffect(()=>{
     console.log('useEffect1 감지됨');
-    //c2.filter((i)=> i.includes([c1_u]))
     setC2(c2.filter((i)=> i.includes(c1_u)));
-    console.log('확인22 : ', c2_u);
+    //console.log('c2_u', c2_u)
   }, [c1_u]);
-
+  
   useEffect(()=>{
     console.log('useEffect2 감지됨');
-    c3DataShow();
-  }, [c2_u]);
+    console.log('data', data);
+    setDetail();
+  }, [c1_u, c2_u]);
+
+  const setDetail =(e)=> {
+    console.log('i', e);
+    const ee = (e||'').split(' , ')[1]; //대박
+    console.log('ee', ee);
+    setC3(
+      data.filter((i)=>
+      i.사고유형_대분류 === c1_u && i.사고유형_중분류 === ee
+      ))
+      
+    }
   
-  function c3DataShow() {
-    console.log('hi', Object.keys(data).map(i => data[i]))
-    
-    //setC3(Object.keys(data).filter(() => data.includes(c2_u)));
-    setC3(Object.keys(data).map((i) => data[i]));
-    console.log('c3u', c3_u)
-  }
-
-  /*const activeBtn =()=> {
-    document.querySelectorAll()
-  }*/
-
   return (
     <div id="ContWrapper">
         <div id="THeader">
@@ -209,9 +216,9 @@ const Taccident = () => {
           
         </div>
         <div id="TMain">
-            <Tm c1 = {c1_unique} setC1 = {setC1}/>
-            <TmMid c2 = {c2_u} c3DataShow = {c3DataShow} c3_u = {c3_u}/>
-            <TmSub c3 = {c3_u}/>
+            <Tm c1 = {c1_unique} setC1 = {setC1} init={init}/>
+            <TmMid c2 = {c2_u} setDetail = {setDetail} init={init}/>
+            <TmSub c3 = {c3_u} />
         </div>
     </div>
   ) ;

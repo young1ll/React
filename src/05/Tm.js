@@ -1,9 +1,13 @@
-const Tm = ({c1, setC1}) => {
-    let k=0;
+const Tm = ({c1, setC1, init}) => {
     let c1List = c1.map((i)=>
         //setC1은 c1[i]의 값을 받는다
-        <li className="Tlist" key = {k++} onClick={()=>setC1(i)}>{i}</li>
+        <li className="Tlist fSort"
+            key = {i}
+            onClick={()=> {
+                setC1(i);
+            }}>{i}</li>
     );
+    init();
 
     return (
         <div className="tBox flexSml">

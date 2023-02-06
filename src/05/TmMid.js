@@ -1,11 +1,15 @@
-const TmMid = ({c2, c3DataShow}) => {
+const TmMid = ({c2, setDetail, init}) => {
     let c1List = [];
-    //c1List = c2;
-    let k=0;
     c1List = c2.map((i)=>
         //setC1은 c1[i]의 값을 받는다
-        <li className="Tlist" key = {k++} onClick={()=> c3DataShow()}>{(i.split(' , '))[1]}</li>
+        <li className="Tlist mSort"
+            key = {[...i]}
+            onClick={()=> setDetail(i)}>
+                {(i.split(' , '))[1]}
+        </li>
     );
+
+    init();
 
     return (
         <div className="tBox flexSml">
