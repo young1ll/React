@@ -62,7 +62,11 @@ const FetMain =()=>{
     if(listData != null) {
         throwList = Object.values(listData.current.boxOfficeResult.dailyBoxOfficeList);
         throwList = throwList.map(i=> 
-            <tr className='eachMovie' key={i.movieCd} onClick={()=> detailClick(i.movieCd)}><td><span className='mvrk'>{i.rank}</span></td><td>{i.movieNm}</td><td>{i.audiCnt}</td></tr>
+            <tr className='eachMovie' key={i.movieCd} onClick={()=> detailClick(i.movieCd)}>
+                <td><span className='mvrk'>{i.rank}</span></td>
+                <td>{i.movieNm}</td>
+                <td>{Number(i.audiCnt).toLocaleString()}</td>
+                </tr>
             )
     }
 
