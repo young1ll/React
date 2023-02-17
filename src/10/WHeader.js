@@ -9,7 +9,7 @@ const WHeader =({title})=>{
     hTitle = hTitle === 'WeatherMain1' ?
                         '- 단기예보' :
              hTitle === 'WeatherMain2' ?
-                        '- 장기예보' :
+                        '- 중기예보' :
                         '';
     return(
         <div id="navBar">

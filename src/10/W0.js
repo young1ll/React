@@ -5,7 +5,7 @@ const W0 =()=>{
         <div className="contBox">
 
             <div className="msgBox">
-            <p id="homeMsg">This is Our Main Homepage!</p>
+            <p id="homeMsg">This is Main Homepage!</p>
             </div>
 
         </div>

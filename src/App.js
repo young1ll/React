@@ -5,8 +5,9 @@ import './App.css';
 //import Gal from "./06/Gal";
 //import CompMain from "./07/CompMain";
 //import RouterMain from "./09/RouterMain";
-import WMain from "./10/WMain";
-import { BrowserRouter } from 'react-router-dom'
+// import WMain from "./10/WMain";
+// import { BrowserRouter } from 'react-router-dom'
+import FetMain from "./11/FetMain";
 
 const App =()=> {
   return (
@@ -14,9 +15,10 @@ const App =()=> {
     //<Gal />
     //<CompMain />
       //<RouterMain /> 
-    <BrowserRouter>
-      <WMain />
-    </BrowserRouter>
+    // <BrowserRouter>
+    //   <WMain />
+    // </BrowserRouter>
+    <FetMain />
   );
 }
 
